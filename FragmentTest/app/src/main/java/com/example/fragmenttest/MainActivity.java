@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("测试", "测试测试1");
         Button button = findViewById(R.id.button);
         button.setOnClickListener(this);
-//        replaceFragment(new RightFragment());
+        replaceFragment(new RightFragment());
 
     }
 
