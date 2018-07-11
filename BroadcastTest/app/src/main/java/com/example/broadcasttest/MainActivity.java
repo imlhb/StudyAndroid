@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent("com.example.broadcasttest.MY_BROADCAST");
-                sendBroadcast(intent);
+//                sendBroadcast(intent);
+                sendOrderedBroadcast(intent,null);
             }
         });
         intentFilter = new IntentFilter();
