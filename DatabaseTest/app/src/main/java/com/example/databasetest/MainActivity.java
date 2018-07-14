@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
                 dbHelper.getWritableDatabase();
             }
         });
-
+//插入数据
         Button addData = (Button) findViewById(R.id.add_data);
         addData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +43,27 @@ public class MainActivity extends AppCompatActivity {
                 values.put("pages",510);
                 values.put("price",19.95);
                 db.insert("Book",null,values);
+            }
+        });
+//更新数据
+        Button updateData = (Button) findViewById(R.id.update_data);
+        updateData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                ContentValues values = new ContentValues();
+                values.put("price",10.99);
+                db.update("Book",values,"name = ?",new String[]{"The Da Vinci Code"});
+            }
+        });
+//删除数据
+        Button deleteButton = (Button) findViewById(R.id.delete_data);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                ContentValues values = new ContentValues();
+                db.delete("Book","pages > ?",new String[]{"500"} );
             }
         });
     }
