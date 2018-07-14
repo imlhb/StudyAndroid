@@ -1,16 +1,18 @@
 package com.example.databasetest;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
     private MyDatabaseHelper dbHelper;
-
+    public final String TAG = "MainActivityTest";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +66,28 @@ public class MainActivity extends AppCompatActivity {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 ContentValues values = new ContentValues();
                 db.delete("Book","pages > ?",new String[]{"500"} );
+            }
+        });
+
+        Button queryButton = findViewById(R.id.query_data);
+        queryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                Cursor cursor = db.query("Book",null,null,null,null,null,null);
+                if (cursor.moveToFirst()){
+                    do{
+                        String name = cursor.getString(cursor.getColumnIndex("name"));
+                        String author = cursor.getString(cursor.getColumnIndex("author"));
+                        int pages = cursor.getInt(cursor.getColumnIndex("pages"));
+                        double price = cursor.getDouble(cursor.getColumnIndex("price"));
+                        Log.d(TAG, "书的名字为" + name);
+                        Log.d(TAG, "书的作者为" + author);
+                        Log.d(TAG, "书的页数为" + pages);
+                        Log.d(TAG, "书的价格为" + price);
+                    }while (cursor.moveToNext());
+                }
+                cursor.close();
             }
         });
     }
