@@ -5,11 +5,15 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -42,6 +46,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setContentIntent(pi)
                         //点击后销毁通知
                         .setAutoCancel(true)
+                        //通知播放音乐
+                        .setSound(Uri.fromFile(new File("/system/media/audio/ringtones/Celesta.ogg")))
+                        //手机振动（需要在AndroidManifest中指定振动权限）
+                        .setVibrate(new long[]{0,1000,1000,1000})
+                        //设置LED灯的颜色和闪烁效果
+                        .setLights(Color.GREEN,1000,1000)
+                        //手机默认
+//                        .setDefaults(NotificationCompat.DEFAULT_ALL)
                         .build();
                 manager.notify(1,notification);
                 break;
