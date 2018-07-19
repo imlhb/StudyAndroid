@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //这里原有的NotificationCompat.Builder被弃用，后面括号里面新加入个String参数即可
                 Notification notification = new NotificationCompat.Builder(this,"default")
                         .setContentTitle("这是标题")
-                        .setContentText("这是内容")
+                        .setContentText("这是内容,现在我们把通知的内容加长，加到特别长，你说多长我也不知道，反正很长很长，长到手机装不下，看他是什么效果。")
                         .setWhen(System.currentTimeMillis())
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher))
@@ -54,6 +54,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setLights(Color.GREEN,1000,1000)
                         //手机默认
 //                        .setDefaults(NotificationCompat.DEFAULT_ALL)
+                        //长通知效果，但是小米4测试无效
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText("这是内容,现在我们把通知的内容加长，加到特别长，你说多长我也不知道，反正很长很长，长到手机装不下，看他是什么效果。"))
+                        //通知显示图片，小米测试无效。Nexus测试成功
+                        .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(BitmapFactory.decodeResource(getResources(),R.drawable.a)))
+                        //设置重要程度PRIORITY_DEFAULT：默认，PRIORITY_MIN：最低，PRIORITY_LOW:较低，PRIORITY_HIGH：较高，PRIORITY_MAX：最高
+                        //测试发现，小米没有反应因为小米需要设置悬浮权限，Nexus测试成功
+                        .setPriority(NotificationCompat.PRIORITY_MAX)
                         .build();
                 manager.notify(1,notification);
                 break;
