@@ -79,11 +79,11 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "onActivityResult:看看 ");
                     try {
                         //将拍设的照片显示出来
+//找到原因了Bitmap too large to be uploaded into a texture 位图太大了
                         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
                         Log.d(TAG, "onActivityResult: "+bitmap);
                         picture.setImageBitmap(bitmap);
                         Log.d(TAG, "onActivityResult: "+imageUri);
-
                         Log.d(TAG, "onActivityResult:看看4 ");
                     }catch (FileNotFoundException e){
                         e.printStackTrace();
