@@ -10,10 +10,18 @@
         android:layout_height="wrap_content"
         android:text="拍照"/>
 
+    <Button
+        android:id="@+id/choose_from_album"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="选择照片"/>
+
     <ImageView
         android:id="@+id/picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_launcher"
         android:layout_gravity="center_horizontal"/>
+
+
 </LinearLayout>
